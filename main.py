@@ -1,22 +1,25 @@
-
 import numpy as np
 
-##### TODO #########################################
-### IMPLEMENT 'getMyPosition' FUNCTION #############
-### TO RUN, RUN 'eval.py' ##########################
+def getMyPosition(prcSoFar: np.ndarray) -> np.ndarray:
+    n_inst, n_days = prcSoFar.shape
+    pos = np.zeros(n_inst)
 
-nInst = 50
-currentPos = np.zeros(nInst)
+    short_window = 5
+    long_window = 20
 
+    if n_days < long_window:
+        return pos  # Not enough data yet
 
-def getMyPosition(prcSoFar):
-    global currentPos
-    (nins, nt) = prcSoFar.shape
-    if (nt < 2):
-        return np.zeros(nins)
-    lastRet = np.log(prcSoFar[:, -1] / prcSoFar[:, -2])
-    lNorm = np.sqrt(lastRet.dot(lastRet))
-    lastRet /= lNorm
-    rpos = np.array([int(x) for x in 5000 * lastRet / prcSoFar[:, -1]])
-    currentPos = np.array([int(x) for x in currentPos+rpos])
-    return currentPos
+    for i in range(n_inst):
+        prices = prcSoFar[i, :]
+        short_ma = np.mean(prices[-short_window:])
+        long_ma = np.mean(prices[-long_window:])
+
+        if short_ma > long_ma:
+            pos[i] = 100  # Long position
+        elif short_ma < long_ma:
+            pos[i] = -100  # Short position
+        else:
+            pos[i] = 0  # Flat
+
+    return pos

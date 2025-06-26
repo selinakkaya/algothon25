@@ -95,3 +95,8 @@ The formula used will be:
 Your algorithms will be assessed against _unseen, future_ price data of the same 50 instruments within the provided simulated trading universe.
 
 We expect algorithms to have a maximum runtime of ~10min.
+
+python eval.py - simulating and evaluating the performance of a trading algorithm or strategy over a period of 750 days.
+Returns: Day, Value (cummulative profit and loss), todayPL (PnL for that day), $-traded (total dollar amount of trades executed by your algorithm up to and including that specific day), return (The return on any given day tells you the percentage change in your trading account's value for that specific day. It's calculated by dividing the todayPL (Today's Profit/Loss) by the account's value at the start of the day).
+
+python backtester.py - summary statistics and visualisations of a trading strategy's performance.
