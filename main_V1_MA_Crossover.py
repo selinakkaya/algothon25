@@ -1,5 +1,7 @@
 import numpy as np
 
+# This is a simple Moving Average Crossover strategy.
+
 # Currently Implemented Features:
     # Trend Signal:	Uses a 5-day short MA vs 20-day long MA to detect upward/downward momentum
     # Per-Instrument Logic:	Strategy runs independently per instrument using its price history
